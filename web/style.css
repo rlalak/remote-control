@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+
+#plan {
+    width: auto;
+    height: 100%;
+}
+
+.control {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+
+.control div {
+    background-color: white;
+    border: 2px solid black;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.control div.reload {
+
+}
+
+.button {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.button-on {
+    background-color: green;
+}
+
+.button-off {
+    background-color: red;
+}
+
+.button.loading {
+    background-image: url('/loader.gif');
+    background-color: white;
+}
+
