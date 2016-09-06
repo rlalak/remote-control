@@ -18,7 +18,7 @@ class Button
         $this->esp_ip = $ip;
     }
 
-    public function setIsRevertedState(bool $is_reverted_state)
+    public function setIsRevertedState($is_reverted_state)
     {
         $this->is_reverted_state = $is_reverted_state;
     }
