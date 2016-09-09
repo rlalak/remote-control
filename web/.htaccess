@@ -1,4 +1,4 @@
 AuthType Basic
-AuthName "Password Protected Area"
+AuthName "Dostęp tylko dla zaufanych :)"
 AuthUserFile /var/www/remote-control/web/.htpasswd
 Require valid-user
