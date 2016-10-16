@@ -1,7 +1,8 @@
 <?php
+
 include '../../lib/Controller.php';
 
-$button = Buttons::getButton($_GET['name']);
+$button = $button_repository->get($_GET['id']);
 
 $button->loadState();
 

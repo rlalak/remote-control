@@ -1,2 +1,2 @@
-<? include '../lib/Controller.php'; ?>
-<? include '../template/layout.php'; ?>
+<?php include '../lib/Controller.php'; ?>
+<?php include '../template/layout.php'; ?>

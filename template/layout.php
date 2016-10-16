@@ -4,9 +4,9 @@
     <title>Lalak-Home remote control</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" type="text/css" media="screen, print" href="style.css"/>
-    <script type="text/javascript" src="jquery-2.2.2.min.js"></script>
-    <script type="text/javascript" src="script.js"></script>
-    <script type="text/javascript" src="button.js"></script>
+    <script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/button.js"></script>
 </head>
 
 
@@ -18,7 +18,7 @@
     <div class="reload">re</div>
 
 </div>
-<? foreach (Buttons::getAll() as $button): ?>
+<? foreach ($button_repository->getAll() as $button): ?>
     <?= $button->render(); ?>
 <? endforeach; ?>
 <script type="text/javascript">Plan = new Plan();</script>

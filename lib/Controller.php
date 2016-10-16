@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
-include 'Button.php';
-include 'Buttons.php';
+set_include_path(
+    get_include_path()
+    . PATH_SEPARATOR . "/home/rlalak/Projects/remote-control/"
+);
 
-$button = Buttons::registerButton('choinka', 690, 375, '192.168.1.210');
-$button->setIsRevertedState(true);
+include "config/config.php";
 
+$esp_repository = new EspRepository('config/EspDatabase.php');
 
+$button_repository = new ButtonRepository('config/ButtonDatabase.php', $esp_repository);

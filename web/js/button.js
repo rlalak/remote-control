@@ -65,7 +65,7 @@ var Button = function ($button) {
 
     priv.getAjaxData = function () {
         return {
-            name: priv.$button.attr('name')
+            id: priv.$button.data('id')
         };
     };
 
