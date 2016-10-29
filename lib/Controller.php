@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 set_include_path(
     get_include_path()
-    . PATH_SEPARATOR . "/home/rlalak/Projects/remote-control/"
+    . PATH_SEPARATOR . "/var/www/remote-control/"
 );
 
 include "config/config.php";
