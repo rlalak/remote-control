@@ -1,4 +1,4 @@
 AuthType Basic
 AuthName "Password required"
-AuthUserFile /var/www/remote-control/lib/.htpasswd
+AuthUserFile /var/www/remote-control/conf/.htpasswd
 Require valid-user
