@@ -14,7 +14,7 @@ var Button = function ($button) {
 
         $.ajax('/ajax/status.php', {
             data: priv.getAjaxData(),
-            timeout: 5000,
+            timeout: 10000,
             async: true,
             success: function (response) {
                 priv.removeLoading();
@@ -40,7 +40,7 @@ var Button = function ($button) {
     priv.changeStatus = function () {
         priv.setLoading();
 
-        $.ajax('/ajax/toogle.php', {
+        $.ajax('/ajax/toggle.php', {
             data: priv.getAjaxData(),
             timeout: 5000,
             async: true,

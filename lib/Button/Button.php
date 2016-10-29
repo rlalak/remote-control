@@ -1,18 +1,18 @@
 <?php
 
-class Button
+abstract class Button
 {
-    private $id;
-    private $name;
-    private $position_x;
-    private $position_y;
+    protected $id;
+    protected $name;
+    protected $position_x;
+    protected $position_y;
 
     /**
      * @var ESP
      */
-    private $esp;
+    protected $esp;
 
-    private $state = null;
+    protected $state = null;
 
     public function __construct($id, ESP $esp, $name, $position_x, $position_y)
     {
@@ -23,34 +23,21 @@ class Button
         $this->position_y = $position_y;
     }
 
-    public function loadState()
-    {
-        $this->state = (bool)$this->callEsp('status');
-    }
+    abstract public function loadState();
 
-    public function toogle()
-    {
-        $this->state = (bool)$this->callEsp('toogle');
-    }
+    abstract public function toggle();
 
-    public function on()
-    {
-        $this->state = (bool)$this->callEsp('on');
-    }
+    abstract public function on();
 
-    public function off()
-    {
-        $this->state = (bool)$this->callEsp('off');
-    }
+    abstract public function off();
 
     public function getState()
     {
-        return $this->state;
-    }
+        if (null === $this->state) {
+            $this->loadState();
+        }
 
-    protected function callEsp($path)
-    {
-        return $this->esp->call($path);
+        return $this->state;
     }
 
     public function render()
@@ -68,10 +55,13 @@ class Button
         $style = "left: {$this->position_x}px; top: {$this->position_y}px;";
 
         return
-            '<div class="' . implode(" ", $button_class) .
-            '" style="' . $style . '" data-id="' . $this->id .
-            '" left="' . $this->position_x . '"' .
-            '" top="' . $this->position_y . '"' .
+            '<div'.
+            ' class="' .  implode(" ", $button_class) . '"' .
+            ' style="' . $style . '"' .
+            ' data-id="' . $this->id . '"' .
+            ' data-left="' . $this->position_x . '"' .
+            ' data-top="' . $this->position_y . '"' .
+            ' alt="' . $this->name. '"' .
             '>'
             . $html .
             '</div>';

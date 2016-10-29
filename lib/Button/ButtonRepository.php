@@ -23,10 +23,24 @@ class ButtonRepository extends PhpFileRepository
         parent::__construct($file_path);
     }
 
-    protected function create($id, $esp_id, $name, $position_x, $position_y)
-    {
+    protected function create(
+        $id,
+        $esp_id,
+        $name,
+        $position_x,
+        $position_y,
+        ButtonType $type,
+        StateNumber $state_number = null
+    ) {
         $esp = $this->esp_repository->get($esp_id);
 
-        return new Button($id, $esp, $name, $position_x, $position_y);
+        if (ButtonType::SINGLE_STATE == $type->__toString()) {
+            $button = new ButtonSingleState($id, $esp, $name, $position_x, $position_y);
+            $button->setStateNumber($state_number);
+
+            return $button;
+        } elseif (ButtonType::FULL_STATE == $type) {
+            return new ButtonFullState($id, $esp, $name, $position_x, $position_y);
+        }
     }
 }

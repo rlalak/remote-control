@@ -9,11 +9,13 @@
 class Esp
 {
     private $id = null;
-    private $desription = null;
+    private $description = null;
     private $ip = null;
     private $number_of_states = null;
 
     private $is_reverted_state = false;
+
+    private $state = null;
 
     public function __construct($id, $description, $ip, $number_of_states)
     {
@@ -28,14 +30,67 @@ class Esp
         $this->is_reverted_state = $is_reverted_state;
     }
 
-    public function call($path)
+    protected function call($path, array $parameters = [])
     {
-        $state = @file_get_contents('http://' . $this->ip . '/' . $path);
+        $url = 'http://' . $this->ip . '/' . $path;
+
+        if (!empty($parameters)) {
+            $url .= "?" . http_build_query($parameters);
+        }
+
+        $response = @file_get_contents($url);
+//var_dump($url, $parameters,$response);
+        if (false === $response || false !== strpos($response, 'File Not Found')) {
+            throw new InvalidArgumentException("Incorrect path `$path` for ip `{$this->ip}`.");
+        }
 
         if ($this->is_reverted_state) {
-            return $state == '1' ? '0' : '1';
+            $this->state = $response == '1' ? '0' : '1';
         } else {
-            return $state;
+            $this->state = $response;
         }
+    }
+
+    protected function getStateBit(StateNumber $state_number)
+    {
+        if ($state_number->val() > $this->number_of_states) {
+            throw new InvalidArgumentException("Incorrect state number `$state_number`.");
+        }
+
+        return pow(2, $state_number->val() - 1);
+    }
+
+    protected function loadState()
+    {
+        $this->call('get-state');
+    }
+
+    public function getState()
+    {
+        if (null === $this->state) {
+            $this->loadState();
+        }
+
+        return $this->state;
+    }
+
+    public function setState($state)
+    {
+        $this->call('set-state', ['state' => $state]);
+    }
+
+    public function getSingleState(StateNumber $state_number)
+    {
+        return $this->getState() & $this->getStateBit($state_number);
+    }
+
+    public function setSingleState(StateNumber $state_number, SingleState $state_value)
+    {
+        $this->call('set-one-state', ['state_number' => $state_number->val(), 'state_value' => $state_value->val()]);
+    }
+
+    public function toggleSingleState(StateNumber $state_number)
+    {
+        $this->call('toogle-one-state', ['state_number' => $state_number->val()]);
     }
 }

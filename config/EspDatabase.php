@@ -7,6 +7,6 @@
  */
 
 return [
-    EspRepository::ID_LIVING_ROOM => ['Esp from living room', '192.168.1.210', 1],
-    EspRepository::ID_WARDROBE => ['Esp from living wardrobe', '192.168.1.211', 2]
+    EspRepository::ID_LIVING_ROOM => ['Esp from living room', '192.168.1.210', 1, true],
+    EspRepository::ID_WARDROBE => ['Esp from living wardrobe', '192.168.1.211', 2, false]
 ];

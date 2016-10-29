@@ -60,8 +60,8 @@ var Plan = function () {
         $('.button').each(function(key, button){
             var $button = $(button);
 
-            var left = $button.attr('left');
-            var top = $button.attr('top');
+            var left = $button.data('left');
+            var top = $button.data('top');
 
             $button.css('left', left * priv.zoom);
             $button.css('top', top * priv.zoom);
