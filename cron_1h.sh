@@ -1,0 +1,1 @@
+date >> /var/www/remote-control/log/cron_1h.log
