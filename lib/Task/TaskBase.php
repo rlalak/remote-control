@@ -20,7 +20,7 @@ abstract class TaskBase
     protected function log($message)
     {
         $message = date('Y-m-d H:i:s - ') . $message . "\n";
-        echo $message;
+
         file_put_contents('/var/www/remote-control/log/' . get_called_class() . '.log', $message, FILE_APPEND);
     }
 }
