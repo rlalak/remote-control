@@ -81,12 +81,21 @@ class Esp
 
     public function getSingleState(StateNumber $state_number)
     {
-        return $this->getState() & $this->getStateBit($state_number);
+        $state_bit = $this->getStateBit($state_number);
+
+        $and_state = $this->getState() & $state_bit;
+
+        return $and_state == $state_bit ? 1 : 0;
     }
 
     public function setSingleState(StateNumber $state_number, SingleState $state_value)
     {
-        $this->call('set-one-state', ['state_number' => $state_number->val(), 'state_value' => $state_value->val()]);
+        // 'set-one-state' not exist yet
+        if ($this->getSingleState($state_number) != $state_value->val()) {
+            $this->toggleSingleState($state_number);
+        }
+
+        //$this->call('set-one-state', ['state_number' => $state_number->val(), 'state_value' => $state_value->val()]);
     }
 
     public function toggleSingleState(StateNumber $state_number)

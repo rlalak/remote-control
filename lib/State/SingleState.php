@@ -9,7 +9,7 @@
 class SingleState
 {
     const ON = 1;
-    const OFF = 2;
+    const OFF = 0;
 
     private $state;
 

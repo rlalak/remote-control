@@ -17,3 +17,5 @@ include 'lib/Esp/EspOld.php';
 include 'lib/Esp/EspRepository.php';
 include 'lib/State/StateNumber.php';
 include 'lib/State/SingleState.php';
+include 'lib/Task/TaskBase.php';
+include 'lib/Task/WardrobeFanTask.php';
