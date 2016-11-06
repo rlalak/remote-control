@@ -15,16 +15,18 @@ class WardrobeFanTask extends TaskBase
 
         $fun_button = $button_repository->get(ButtonRepository::ID_WARDROBE_FAN);
 
-        $minute = date('i');
+        $hour = date('h');
 
-        if ($minute % 2 == 0) {
+        if ($hour == 7) {
             $fun_button->on();
 
             $this->log("Fun on.");
-        } else {
+        } elseif ($hour == 22) {
             $fun_button->off();
 
             $this->log("Fun off.");
+        } else {
+            $this->log("Is hour `$hour` I do not know what should I do.");
         }
 
     }
